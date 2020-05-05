@@ -19,7 +19,7 @@ import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
 @SpringBootTest
 public class ListTest {
 	
-	@Test
+	//@Test
 	public void ListTest() throws IOException {
 		
 		Level0Titles level0Titles=new Level0Titles();
@@ -80,6 +80,56 @@ public class ListTest {
         template.close();
 		
 		
+	}
+	
+	@Test
+	public void test() throws IOException {
+		ParentTitle parentTitle=new ParentTitle();
+		parentTitle.setTitleNum("1.x");
+		parentTitle.setTitleDesc("二级级标题测试");
+		List<SonTitle> sonTitles=new ArrayList<SonTitle>();
+
+		SonTitle sonTitle=new SonTitle();
+		for(int i=1;i<11;i++) {
+			sonTitle=new SonTitle();
+			sonTitle.setTitleNum("1."+i);
+			sonTitle.setTitleDesc("三级级标题测试");
+			sonTitle.setContent("neirong");
+			List<Param> params=new ArrayList<Param>();
+			for (int j = 1; j < 11; j++) {
+				Param param=new Param();
+				param.setParamName("param"+j);
+				param.setParamType("int"+j);
+				param.setEq(j);
+				params.add(param);
+			}
+			TableData tableData=new TableData();
+			tableData.setParams(params);
+			tableData.setClassName("className"+i);
+			tableData.setType("String"+i);
+			tableData.setClassDesc("classDesc"+i);
+			sonTitle.setTableData(tableData);
+			//sonTitle.setClassName("className"+i);
+			//sonTitle.setClassDesc("classDesc"+i);
+			//sonTitle.setParams(params);
+			//sonTitle.setReturnType("String"+i);
+			sonTitles.add(sonTitle);
+		}
+
+		parentTitle.setSonTitles(sonTitles);
+		//System.out.println(parentTitle.toString());
+		//parentTitles.add(parentTitle);
+		
+		HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+		Configure config = Configure.newBuilder().bind("tableData.params",policy).build();
+		
+		XWPFTemplate template = XWPFTemplate.compile("src/test/resources/testTemp1.docx",config).render(parentTitle);
+
+        FileOutputStream out = new FileOutputStream("testx"+".docx");
+        template.write(out);
+        out.flush();
+        out.close();
+        template.close();
 	}
 	
 	

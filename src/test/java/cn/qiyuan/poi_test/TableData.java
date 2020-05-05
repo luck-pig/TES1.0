@@ -7,6 +7,13 @@ public class TableData {
 	public List<Param> params;
 	public String type;
 	public String returnType;
+	public String classDesc;
+	public String getClassDesc() {
+		return classDesc;
+	}
+	public void setClassDesc(String classDesc) {
+		this.classDesc = classDesc;
+	}
 	public String getClassName() {
 		return className;
 	}

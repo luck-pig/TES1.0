@@ -11,6 +11,13 @@ public class SonTitle extends ParentTitle{
 	public List<Param> params;
 	public String classDesc;
 	public String returnType;
+	public TableData tableData;
+	public TableData getTableData() {
+		return tableData;
+	}
+	public void setTableData(TableData tableData) {
+		this.tableData = tableData;
+	}
 	public String getContent() {
 		return content;
 	}

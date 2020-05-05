@@ -20,10 +20,17 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  servlet:
+    multipart:
+      enabled: true
+      fileSizeThreshold: 2KB
+      maxFileSize: 200MB
+      maxRequestSize: 215MB
 server:
   port: 8080
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   config-location: classpath:mybatis-config.xml
-
+file: 
+  uploadDir: src/main/resources
   
